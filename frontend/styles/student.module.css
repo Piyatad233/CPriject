@@ -2,7 +2,7 @@
   background-color: green;
   border-radius: 10%;
   border: none;
-  color: white;
+  color: rgb(21, 189, 240);
   padding: 10px 18px;
   text-align: center;
   text-decoration: none;
@@ -15,7 +15,7 @@
   background-color: red;
   border-radius: 10%;
   border: none;
-  color: white;
+  color: rgb(250, 59, 59);
   padding: 10px 10px;
   text-align: center;
   text-decoration: none;
@@ -76,7 +76,7 @@
   justify-content: center;
   align-items: center;
   border: 10px solid blue;
-  background-color: antiquewhite;
+  background-color: rgb(241, 150, 30);
 }
 .listItem {
   display: flex;

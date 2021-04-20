@@ -29,7 +29,7 @@ passport.authenticate('local', { session: false }, (err, user, info) => {
     if (err) return next(err)
     if (user) {
         const token = jwt.sign(user, db.SECRET, {
-            expiresIn: '1d'
+            expiresIn: '7d'
         })
         // req.cookie.token = token
         res.setHeader(
@@ -107,8 +107,8 @@ res.send('Respond without authentication');
 });
 let students = {
     list: [
-      { "id": 1, "name": "Siriluck","surname": "Raksawat","major": "COE" ,"GPA": 2.89 },
-      { "id": 2, "name": "Benjamas","surname": "Kaewsiri","major": "COE" ,"GPA": 2.15 }]
+      { "id": 1, "name": "aaa","surname": "rrr","major": "COE" ,"GPA": 2.89 },
+      { "id": 2, "name": "bbb","surname": "aaaa","major": "COE" ,"GPA": 2.15 }]
   }
 
 

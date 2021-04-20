@@ -5,7 +5,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: antiquewhite;
+    background-color: rgba(20, 227, 241, 0.534);
 }
 
 .content {
@@ -19,7 +19,7 @@
 }
 
 .gridContainer>div {
-    background-color:pink;
+    background-color:rgb(192, 255, 229);
     text-align: left;
     padding: 10px 0;
     font-size: 1.2rem;
