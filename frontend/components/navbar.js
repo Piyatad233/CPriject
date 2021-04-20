@@ -2,13 +2,15 @@ import Link from 'next/link'
 
 const Navbar = () => (
     <div>
-        <Link href="/"><a> Home </a></Link> |
-        <Link href="/register"><a> Register </a></Link>  |
-        <Link href="/login"><a> Login </a></Link> |
-        <Link href="/profile"><a> Profile </a></Link> | 
-        <Link href="/foo"><a> Foo </a></Link> | 
-        <Link href="/getConfig"><a> Config </a></Link> | 
-        <Link href="/logout"><a> Logout </a></Link> 
+        <Link href="/"><a> <b>Home </b></a></Link> |
+        <Link href="/register"><a> <b>Register</b> </a></Link>  |
+        <Link href="/login"><a> <b>Login</b> </a></Link> |
+        <Link href="/profile"><a> <b>Profile</b> </a></Link> | 
+        <Link href="/foo"><a> <b>Foo </b></a></Link> |
+        <Link href="/studentedit"><a> <b>Student Edit</b> </a></Link> |
+        <Link href="/getConfig"><a><b> Config</b> </a></Link> | 
+        <Link href="/logout"><a> <b>Logout</b> </a></Link> 
+        
     </div>
 )
 

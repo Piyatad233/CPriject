@@ -7,21 +7,21 @@ import axios from 'axios'
 import withAuth from '../components/withAuth'
 import config from '../config/config'
 
-const Foo = ({ token }) => {
+const Foo1 = ({ token }) => {
 
     const [user, setUser] = useState({})
 
     useEffect(() => {
-        profileUser()
+        fooUser()
     }, [])
 
-    const profileUser = async () => {
+    const fooUser = async () => {
         try {
-            // console.log('token: ', token)
+            
             const users = await axios.get(`${config.URL}/foo`, {
                 headers: { Authorization: `Bearer ${token}` }
             })
-            //console.log('user: ', users.data)
+           
             setUser(users.data)
         }
         catch (e) {
@@ -33,11 +33,16 @@ const Foo = ({ token }) => {
     return (
         <Layout>
             <Head>
-                <title>Foo</title>
+                <title>User foo</title>
             </Head>
             <div className={styles.container}>
                 <Navbar />
+                <h1>User foo</h1>
                 <div>
+                    <b>Token:</b> {token.substring(0, 15)}... <br /><br />
+                    This route is protected by token, user is required to login first.
+                    <br/>
+                    Otherwise, it will be redirect to Login page
                     <br/><br/>
                     {JSON.stringify(user)}
                 </div>
@@ -46,7 +51,7 @@ const Foo = ({ token }) => {
     )
 }
 
-export default withAuth(Foo)
+export default withAuth(Foo1)
 
 export function getServerSideProps({ req, res }) {
     return { props: { token: req.cookies.token || "" } };

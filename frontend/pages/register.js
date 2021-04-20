@@ -1,4 +1,3 @@
-
 import { useState } from 'react'
 import Head from 'next/head'
 import Layout from '../components/layout'
@@ -40,7 +39,7 @@ export default function Register({ token }) {
     const registerForm = () => (
         <div className={styles.gridContainer}>
             <div>
-                Username:
+                <b>Username:</b>
             </div>
             <div>
                 <input type="text"
@@ -50,7 +49,7 @@ export default function Register({ token }) {
                 />
             </div>
             <div>
-                Email:
+                <b>Email:</b>
             </div>
             <div>
                 <input type="email"
@@ -59,7 +58,7 @@ export default function Register({ token }) {
                     onChange={(e) => setEmail(e.target.value)} />
             </div>
             <div>
-                Password:
+                <b>Password:</b>
             </div>
             <div>
                 <input type="password"
@@ -75,26 +74,28 @@ export default function Register({ token }) {
     return (
         <Layout>
             <Head>
-                <title>Register</title>
+                <title>Register Page</title>
             </Head>
             <div className={styles.container}>
                 <Navbar />
                 <h1>Register</h1>
                 <div><b>Token:</b> {token.substring(0, 15)}...
                 <button
+                className={styles.btn1}
                         onClick={() => { navigator.clipboard.writeText(token) }}>
                         Copy token
                 </button>
                 </div>
                 <br />
-            Status:  {status}
+            <b>Status: </b> <i>{status}</i>
                 <br /><br />
                 <div className={styles.content}>
                     {registerForm()}
                 </div>
 
                 <div>
-                    <button onClick={register}>Register</button>
+                    <button className={styles.btn}
+                    onClick={register}>Register</button>
                 </div>
             </div>
         </Layout>
