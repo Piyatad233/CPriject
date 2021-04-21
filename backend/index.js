@@ -7,6 +7,7 @@ cors = require('cors'),
 cookie = require('cookie')
 
 const bcrypt = require('bcrypt')
+const { default: herolist } = require('../frontend/pages/herolist.js')
 
 const db = require('./database.js')
 let users = db.users
@@ -113,51 +114,51 @@ let students = {
 
 
 router
-  .route("/students")
+  .route("/Herolists")
   .get((req, res) => {
-    res.send(students);
+    res.send(herolists);
   })
   .post((req, res) => {
     console.log(req.body);
-    let newstudent = {};
-    newstudent.id = students.list.length ? students.list[students.list.length - 1].id + 1 : 1;
-    newstudent.name = req.body.name;
-    newstudent.surname= req.body.surname;
-    newstudent.major = req.body.major;
-    newstudent.GPA= req.body.GPA;
-    students = { list: [...students.list, newstudent] };
-    res.json(students);
+    let newherolist = {};
+    newherolist.id = herolists.list.length ? herolists.list[herolists.list.length - 1].id + 1 : 1;
+    newherolist.name = req.body.name;
+    newherolist.status= req.body.status;
+    newherolist.rank = req.body.rank;
+    newherolist.number= req.body.number;
+    herolists = { list: [...herolists.list, newherolist] };
+    res.json(herolists);
   });
 
 router
-  .route("/students/:studentid")
+  .route("/herolists/:herolist")
   .get((req, res) => {
-    let id = students.list.findIndex((item) => +item.id == +req.params.studentid)
-    res.json(students.list[id]);
+    let id = herolist.list.findIndex((item) => +item.id == +req.params.herolist)
+    res.json(herolists.list[id]);
   })
   .put((req, res) => {
-    let id = students.list.findIndex((item) => item.id == +req.params.studentid);
-    students.list[id].name = req.body.name;
-    students.list[id].surname = req.body.surname;
-    students.list[id].major = req.body.major;
-    students.list[id].GPA = req.body.GPA;
-    res.json(students.list);
+    let id = herolists.list.findIndex((item) => item.id == +req.params.herolist);
+    herolists.list[id].name = req.body.name;
+    herolists.list[id].status = req.body.status;
+    herolists.list[id].rank = req.body.rank;
+    herolists.list[id].number = req.body.number;
+    res.json(herolists.list);
   })
   .delete((req, res) => {
-    students.list = students.list.filter((item) => +item.id !== +req.params.studentid);
-    res.json(students.list);
+    herolists.list = herolists.list.filter((item) => +item.id !== +req.params.herolist);
+    res.json(herolists.list);
   });
 
 
-router.route("/purchase/:studentId")
+router.route("/purchase/:herolist")
 .post((req,res) => {
-  let id = students.list.findIndex((item) => +item.id == +req.params.studentId)
+  let id = herolists.list.findIndex((item) => +item.id == +req.params.herolist)
   if (id == -1) {
-    res.json({message: "Student not found"})
+    res.json({message: "herolist not found"})
   }
   else {
-    students.list = students.list.filter((item) => +item.id !== +req.params.studentId);
-    res.json(students.list);
+    herolists.list = herolists.list.filter((item) => +item.id !== +req.params.herolist);
+    res.json(herolists.list);
   }
 })
 // Error Handler
