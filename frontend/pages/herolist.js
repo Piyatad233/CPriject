@@ -3,7 +3,8 @@ import React, { useState, useEffect } from "react";
 import styles from "../styles/student.module.css";
 import withAuth from "../components/withAuth";
 import Navbar from "../components/navbar";
-const URL = "http://localhost/api/students";
+
+const URL = "http://localhost/api/herolists";
 const admin = ({ token }) => {
   const [user, setUser] = useState({});
   const [herolists, setHerolists] = useState({});
@@ -31,7 +32,7 @@ const admin = ({ token }) => {
 
   const getHerolist = async (id) => {
     const result = await axios.get(`${URL}/${id}`)
-    console.log('student id: ', result.data)
+    console.log('herolist id: ', result.data)
     setHerolist(result.data)
 }
  
@@ -59,9 +60,9 @@ const admin = ({ token }) => {
   const updateHerolist = async (id) => {
     let result = await axios.put(`${URL}/${id}`, {
       name,
-      surname,
-      major,
-      GPA,
+      status,
+      rank,
+      number,
     });
     console.log(result);
     getHerolists();
@@ -75,7 +76,7 @@ const admin = ({ token }) => {
             <b>Name:</b> {item.name} <br />
             <b>Status:</b> {item.status} <br />
             <b>Rank:</b> {item.rank} <br />
-            <b>Number:</b> {item.nember}
+            <b>Number:</b> {item.number}
             <div className={styles.edit_button}>
               <button
                 className={styles.button_get}
@@ -129,10 +130,12 @@ const admin = ({ token }) => {
         ></input>
         Number:
         <input
-          type="number"
-          name="GPA"
+          type="text"
+          name="number"
           onChange={(e) => setNumber(e.target.value)}
         ></input>
+        Picture : 
+        <input type='file' accept='image/*'/>
         <button
           className={styles.button_add}
           onClick={() => addHerolist(name, status, rank, number)}

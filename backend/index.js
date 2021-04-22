@@ -7,7 +7,7 @@ cors = require('cors'),
 cookie = require('cookie')
 
 const bcrypt = require('bcrypt')
-const { default: herolist } = require('../frontend/pages/herolist.js')
+
 
 const db = require('./database.js')
 let users = db.users
@@ -106,15 +106,15 @@ router.get('/alluser', (req,res) => res.json(db.users.users))
 router.get('/', (req, res, next) => {
 res.send('Respond without authentication');
 });
-let students = {
+let herolists = {
     list: [
-      { "id": 1, "name": "aaa","surname": "rrr","major": "COE" ,"GPA": 2.89 },
-      { "id": 2, "name": "bbb","surname": "aaaa","major": "COE" ,"GPA": 2.15 }]
+      { "id": 1, "name": "aaa","status": "rrr","rank": "S" ,"number": "1"},
+      { "id": 2, "name": "bbb","status": "aaaa","rank": "S" ,"number": "2"}]
   }
 
 
 router
-  .route("/Herolists")
+  .route("/herolists")
   .get((req, res) => {
     res.send(herolists);
   })
