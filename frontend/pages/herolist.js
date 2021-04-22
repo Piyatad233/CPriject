@@ -3,8 +3,7 @@ import React, { useState, useEffect } from "react";
 import styles from "../styles/student.module.css";
 import withAuth from "../components/withAuth";
 import Navbar from "../components/navbar";
-import firebase from '../pages/firebase';
-import { addProduct, getProducts } from "./service/products";
+
 const URL = "http://localhost/api/herolists";
 const admin = ({ token }) => {
   const [user, setUser] = useState({});
@@ -77,11 +76,11 @@ const admin = ({ token }) => {
       return herolists.map((item, index) => {
         return (
           <div className={styles.listItem} key={index}>
-            <b>Picture:</b> {item.imgeurl}<br />
             <b>Name:</b> {item.name} <br />
             <b>Status:</b> {item.status} <br />
             <b>Rank:</b> {item.rank} <br />
             <b>Number:</b> {item.number}<br />
+            <b>Picture:</b> {item.imgeurl}<br />
             <div className={styles.edit_button}>
               <button
                 className={styles.button_get}
@@ -120,26 +119,6 @@ const admin = ({ token }) => {
         reader.readAsDataURL(e.target.files[0]);
   }
 
-  const handlerCreate = () =>{
-    addProduct({name,
-      status,
-      rank,
-      number,
-      imgeurl})
-  }
-
- 
-  useEffect(() => {
-      firebase.firestore().collection('Herolist').get().then(snapshot =>{ console.log('snapshot',snapshot.forEach((res =>{
-        console.log(res)
-      })));})
-
-      console.log('test')
-
-      getProducts().then(res => {
-        console.log(res);
-      })
-  }, [])
   return (
     <div className={styles.container}>
       <Navbar />
@@ -177,7 +156,7 @@ const admin = ({ token }) => {
         onChange={handlerChangeFile}/>
         <button
           className={styles.button_add}
-          onClick={handlerCreate}
+          onClick={() => addHerolist(name, status, rank, number,imgeurl)}
         >
           Add
         </button>
