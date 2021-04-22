@@ -3,7 +3,8 @@ import React, { useState, useEffect } from "react";
 import styles from "../styles/student.module.css";
 import withAuth from "../components/withAuth";
 import Navbar from "../components/navbar";
-
+import firebase from '../pages/firebase';
+import { addProduct, getProducts } from "./service/products";
 const URL = "http://localhost/api/herolists";
 const admin = ({ token }) => {
   const [user, setUser] = useState({});
@@ -13,6 +14,7 @@ const admin = ({ token }) => {
   const [rank, setRank] = useState("");
   const [number, setNumber] = useState("");
   const [herolist, setHerolist] = useState({});
+  const [imgeurl, setImageUrl] = useState("");
   useEffect(() => {
     getHerolists();
     profileUser();
@@ -47,6 +49,7 @@ const admin = ({ token }) => {
       status,
       rank,
       number,
+      imgeurl
     });
     console.log(result);
     getHerolists();
@@ -63,6 +66,7 @@ const admin = ({ token }) => {
       status,
       rank,
       number,
+      imgeurl
     });
     console.log(result);
     getHerolists();
@@ -73,10 +77,11 @@ const admin = ({ token }) => {
       return herolists.map((item, index) => {
         return (
           <div className={styles.listItem} key={index}>
+            <b>Picture:</b> {item.imgeurl}<br />
             <b>Name:</b> {item.name} <br />
             <b>Status:</b> {item.status} <br />
             <b>Rank:</b> {item.rank} <br />
-            <b>Number:</b> {item.number}
+            <b>Number:</b> {item.number}<br />
             <div className={styles.edit_button}>
               <button
                 className={styles.button_get}
@@ -104,6 +109,37 @@ const admin = ({ token }) => {
       return <p>Loading...</p>;
     }
   };
+
+  const handlerChangeFile = e =>{
+    const reader = new FileReader();
+
+      reader.onload = e => {
+          setImageUrl(e.target.result);
+      }
+      if(e.target.files[0])
+        reader.readAsDataURL(e.target.files[0]);
+  }
+
+  const handlerCreate = () =>{
+    addProduct({name,
+      status,
+      rank,
+      number,
+      imgeurl})
+  }
+
+ 
+  useEffect(() => {
+      firebase.firestore().collection('Herolist').get().then(snapshot =>{ console.log('snapshot',snapshot.forEach((res =>{
+        console.log(res)
+      })));})
+
+      console.log('test')
+
+      getProducts().then(res => {
+        console.log(res);
+      })
+  }, [])
   return (
     <div className={styles.container}>
       <Navbar />
@@ -135,17 +171,20 @@ const admin = ({ token }) => {
           onChange={(e) => setNumber(e.target.value)}
         ></input>
         Picture : 
-        <input type='file' accept='image/*'/>
+        <input 
+        type='file' 
+        accept='image/*'
+        onChange={handlerChangeFile}/>
         <button
           className={styles.button_add}
-          onClick={() => addHerolist(name, status, rank, number)}
+          onClick={handlerCreate}
         >
           Add
         </button>
       </div>
 
       <div className={styles.list}>{showHerolist()}</div>
-      <div className={styles.list1}><b><i><ins>(selected Hero)</ins></i></b> <b>  Name:</b>{herolists.name}<b>  Status:</b>{herolists.status} <b>  Rank:</b>{herolists.rank}  <b>Number:</b>{herolists.number}</div>
+      <div className={styles.list1}><b><i><ins>(selected Hero)</ins></i></b> <b>  Name:</b>{herolists.name}<b>  Status:</b>{herolists.status} <b>  Rank:</b>{herolists.rank}  <b>Number:</b>{herolists.number} <b>Picture:</b>{herolists.imgeurl}</div>
     </div>
   );
 };

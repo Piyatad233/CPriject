@@ -126,6 +126,7 @@ router
     newherolist.status= req.body.status;
     newherolist.rank = req.body.rank;
     newherolist.number= req.body.number;
+    newherolist.imgeurl= req.body.imgeurl;
     herolists = { list: [...herolists.list, newherolist] };
     res.json(herolists);
   });
@@ -142,6 +143,7 @@ router
     herolists.list[id].status = req.body.status;
     herolists.list[id].rank = req.body.rank;
     herolists.list[id].number = req.body.number;
+    herolists.list[id].imgeurl = req.body.imgeurl;
     res.json(herolists.list);
   })
   .delete((req, res) => {
