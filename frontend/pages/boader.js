@@ -24,6 +24,7 @@ const boader = () => {
       return data.list.map((item, index) => {
         return (
           <div className={styles.listItem} key={index}>
+            <b>Picture :</b><img src={item.imgeurl} width={200} hight={200} /><br />
             <div><b>Name:</b> {item.name}</div>
             <div><b>Status:</b> {item.status}</div>
              <div> <b>Rank:</b> {item.rank} </div>

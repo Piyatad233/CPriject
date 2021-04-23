@@ -108,8 +108,7 @@ res.send('Respond without authentication');
 });
 let herolists = {
     list: [
-      { "id": 1, "name": "aaa","status": "rrr","rank": "S" ,"number": "1"},
-      { "id": 2, "name": "bbb","status": "aaaa","rank": "S" ,"number": "2"}]
+]
   }
 
 

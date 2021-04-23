@@ -68,7 +68,6 @@ const admin = ({ token }) => {
       imgeurl
     });
     console.log(result);
-    getHerolists();
   };
 
   const showHerolist = () => {
@@ -76,11 +75,13 @@ const admin = ({ token }) => {
       return herolists.map((item, index) => {
         return (
           <div className={styles.listItem} key={index}>
-            <b>Name:</b> {item.name} <br />
-            <b>Status:</b> {item.status} <br />
-            <b>Rank:</b> {item.rank} <br />
-            <b>Number:</b> {item.number}<br />
-            <b>Picture:</b> {item.imgeurl}<br />
+            <b>Picture</b>
+            <div className={styles.imgblock} key={index}><img src={item.imgeurl} width={200} hight={200} /><br /></div>
+            <b>Name: {item.name} <br /></b>
+            <b>Status: {item.status} <br /></b> 
+            <b>Rank: {item.rank} <br /></b>
+            <b>Number: {item.number}<br /></b>
+           
             <div className={styles.edit_button}>
               <button
                 className={styles.button_get}
@@ -108,16 +109,6 @@ const admin = ({ token }) => {
       return <p>Loading...</p>;
     }
   };
-
-  const handlerChangeFile = e =>{
-    const reader = new FileReader();
-
-      reader.onload = e => {
-          setImageUrl(e.target.result);
-      }
-      if(e.target.files[0])
-        reader.readAsDataURL(e.target.files[0]);
-  }
 
   return (
     <div className={styles.container}>
@@ -149,11 +140,12 @@ const admin = ({ token }) => {
           name="number"
           onChange={(e) => setNumber(e.target.value)}
         ></input>
-        Picture : 
-        <input 
-        type='file' 
-        accept='image/*'
-        onChange={handlerChangeFile}/>
+        Picture:
+        <input
+          type='url'
+          name='imageurl'
+          onChange= {(e) => setImageUrl(e.target.value)}
+        />
         <button
           className={styles.button_add}
           onClick={() => addHerolist(name, status, rank, number,imgeurl)}
@@ -161,8 +153,9 @@ const admin = ({ token }) => {
           Add
         </button>
       </div>
-
+    
       <div className={styles.list}>{showHerolist()}</div>
+    
       <div className={styles.list1}><b><i><ins>(selected Hero)</ins></i></b> <b>  Name:</b>{herolists.name}<b>  Status:</b>{herolists.status} <b>  Rank:</b>{herolists.rank}  <b>Number:</b>{herolists.number} <b>Picture:</b>{herolists.imgeurl}</div>
     </div>
   );

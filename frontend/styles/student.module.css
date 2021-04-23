@@ -58,6 +58,7 @@
   padding: 1px;
   flex-wrap: wrap;
   width: 80vw;
+ 
 }
 .list1 {
   display: flex;
@@ -80,6 +81,7 @@
 }
 .listItem {
   display: flex;
+  text-align: left;
   flex-direction: column;
   margin: 20px;
   padding: 10px;
@@ -95,4 +97,8 @@
   border: 2px solid green;
   font-size: 1.4rem;
   text-align: center;
+}
+.imgblock{
+  text-align: center;
+  
 }
