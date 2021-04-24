@@ -140,7 +140,7 @@ const admin = ({ token }) => {
           name="number"
           onChange={(e) => setNumber(e.target.value)}
         ></input>
-        Picture:
+        Picture(URL):
         <input
           type='url'
           name='imageurl'

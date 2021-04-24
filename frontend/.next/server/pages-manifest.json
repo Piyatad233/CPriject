@@ -2,6 +2,7 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/": "pages/index.js",
-  "/herolist": "pages/herolist.js"
+  "/herolist": "pages/herolist.js",
+  "/boader": "pages/boader.js",
+  "/": "pages/index.js"
 }
